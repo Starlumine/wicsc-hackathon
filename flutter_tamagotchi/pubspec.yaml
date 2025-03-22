@@ -26,6 +26,8 @@ flutter:
 
   assets:
     - media/kitty.png
+    - media/kitty_dirty.png
+    - media/kitty_rich.png
 
   fonts:
     - family: PressStart2P

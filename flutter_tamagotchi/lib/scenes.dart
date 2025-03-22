@@ -21,8 +21,21 @@ final scenes = {
   ),
   'buy_house': Scene(
     id: 'buy_house',
-    text: 'You bought a house. It looks great but it cost a lot.',
-    choices: [],
+    text: 'The real estate ageent shows you two houses:',
+    choices: [
+      Choice(
+        text: 'Buy a really nice house',
+        nextSceneId: 'buy_nice_house',
+        moneyChange: -250000,
+        wisdomChange: 0,
+      ),
+      Choice(
+        text: 'Buy a humble house',
+        nextSceneId: 'buy_humble_house',
+        moneyChange: -100000,
+        wisdomChange: 0,
+      ),
+    ],
   ),
   'buy_car': Scene(
     id: 'buy_car',

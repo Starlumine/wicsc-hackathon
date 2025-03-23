@@ -126,6 +126,19 @@ class _IntroScreenState extends State<IntroScreen> {
               height: 128,
             ),
           ),
+          Positioned(
+            bottom: 140,
+            left: 75,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'You',
+                  style: textStyle.copyWith(fontSize: 10),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -29,11 +29,13 @@ class Scene {
   final String text;
   final List<Choice> choices;
   final String? backgroundImage;
+  final int moneyChange;
 
   Scene({
     required this.id,
     required this.text,
     required this.choices,
     this.backgroundImage,
+    this.moneyChange = 0,
   });
 }

@@ -78,27 +78,40 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(
+      fontFamily: 'PressStart2P',
+      fontSize: 10,
+      color: Colors.black,
+      shadows: [
+        Shadow(blurRadius: 1, color: Colors.white, offset: Offset(1, 1)),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                introPages[currentPage],
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: _nextPage,
-                child: Text(
-                  buttons[currentPage],
-                  style: Theme.of(context).textTheme.bodyMedium,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  introPages[currentPage],
+                  style: textStyle,
+                  textAlign: TextAlign.center,
                 ),
-              ),
-            ],
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: _nextPage,
+                  child: Text(
+                    buttons[currentPage],
+                    style: textStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

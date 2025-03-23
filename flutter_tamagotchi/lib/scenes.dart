@@ -4,109 +4,62 @@ import 'game_state.dart';
 final Random _random = Random();
 
 Map<String, Scene> generateScenes(String playerName) {
+  bool businessSuccess = _random.nextBool();
+  bool stockSuccess = _random.nextBool();
+
   return {
     'start': Scene(
       id: 'start',
       text: 'Hey, $playerName! You have a bunch of money, so you feel like splurging. What do you want to do first?',
       choices: [
-        Choice(
-          text: 'Buy a house',
-          nextSceneId: 'buy_house',
-          moneyChange: 0,
-          wisdomChange: 0,
-        ),
-        Choice(
-          text: 'Buy a car',
-          nextSceneId: 'buy_car',
-          moneyChange: 0,
-          wisdomChange: 0,
-        ),
+        Choice(text: 'Buy a house', nextSceneId: 'buy_house', moneyChange: 0, wisdomChange: 0),
+        Choice(text: 'Buy a car', nextSceneId: 'buy_car', moneyChange: 0, wisdomChange: 0),
       ],
     ),
     'buy_house': Scene(
       id: 'buy_house',
       text: 'The real estate agent shows you two houses:',
       choices: [
-        Choice(
-          text: 'Buy a really nice house',
-          nextSceneId: 'random_robbery_or_mom',
-          moneyChange: -250000,
-          wisdomChange: 0,
-        ),
-        Choice(
-          text: 'Buy a humble house',
-          nextSceneId: _random.nextBool() ? 'pipes_burst' : 'no_event',
-          moneyChange: -100000,
-          wisdomChange: 1,
-        ),
+        Choice(text: 'Buy a really nice house', nextSceneId: 'random_robbery_or_mom', moneyChange: -250000, wisdomChange: 0),
+        Choice(text: 'Buy a humble house', nextSceneId: _random.nextBool() ? 'pipes_burst' : 'no_event', moneyChange: -100000, wisdomChange: 1),
       ],
     ),
     'buy_car': Scene(
       id: 'buy_car',
       text: 'You visit the dealership. Which car do you pick?',
       choices: [
-        Choice(
-          text: 'BMW (fancy but risky)',
-          nextSceneId: 'random_robbery_or_mom',
-          moneyChange: -50000,
-          wisdomChange: 0,
-        ),
-        Choice(
-          text: 'Honda Civic (reliable)',
-          nextSceneId: _random.nextBool() ? 'find_money' : 'no_event',
-          moneyChange: -25000,
-          wisdomChange: 1,
-        ),
+        Choice(text: 'BMW (fancy but risky)', nextSceneId: 'random_robbery_or_mom', moneyChange: -50000, wisdomChange: 0),
+        Choice(text: 'Honda Civic (reliable)', nextSceneId: _random.nextBool() ? 'find_money' : 'no_event', moneyChange: -25000, wisdomChange: 1),
       ],
     ),
     'random_robbery_or_mom': Scene(
       id: 'random_robbery_or_mom',
       text: _random.nextBool()
           ? 'Oh no! You got robbed and lost \$20,000!'
-          : 'Your mom asks you for \$20,000 to help with bills.',
+          : 'Your mom sees your BMW and asks you for \$20,000 to "help with bills"',
       choices: [
-        Choice(
-          text: 'Continue',
-          nextSceneId: 'start_business',
-          moneyChange: -20000,
-          wisdomChange: 1,
-        ),
+        Choice(text: 'Continue', nextSceneId: 'start_business', moneyChange: -20000, wisdomChange: 1),
       ],
     ),
     'pipes_burst': Scene(
       id: 'pipes_burst',
       text: 'Uh-oh! Pipes burst in your house. You pay \$5,000 for repairs.',
       choices: [
-        Choice(
-          text: ':(',
-          nextSceneId: 'start_business',
-          moneyChange: -5000,
-          wisdomChange: 1,
-        ),
+        Choice(text: ':(', nextSceneId: 'start_business', moneyChange: -5000, wisdomChange: 1),
       ],
     ),
     'find_money': Scene(
       id: 'find_money',
       text: 'Lucky you! You found \$5,000 hidden in the backseat of your Civic!',
       choices: [
-        Choice(
-          text: 'Awesome!',
-          nextSceneId: 'start_business',
-          moneyChange: 5000,
-          wisdomChange: 0,
-        ),
+        Choice(text: 'Awesome!', nextSceneId: 'start_business', moneyChange: 5000, wisdomChange: 0),
       ],
     ),
     'no_event': Scene(
       id: 'no_event',
       text: 'You continue with your day...',
       choices: [
-        Choice(
-          text: 'Continue',
-          nextSceneId: 'start_business',
-          moneyChange: 0,
-          wisdomChange: 0,
-        ),
+        Choice(text: 'Continue', nextSceneId: 'start_business', moneyChange: 0, wisdomChange: 0),
       ],
     ),
     'start_business': Scene(
@@ -115,7 +68,7 @@ Map<String, Scene> generateScenes(String playerName) {
       choices: [
         Choice(
           text: 'Start a business',
-          nextSceneId: _random.nextBool() ? 'business_success' : 'business_fail',
+          nextSceneId: businessSuccess ? 'business_success' : 'business_fail',
           moneyChange: -100000,
           wisdomChange: 2,
         ),
@@ -130,41 +83,35 @@ Map<String, Scene> generateScenes(String playerName) {
     'business_success': Scene(
       id: 'business_success',
       text: 'Your business is booming! You make \$250,000 profit!',
+      moneyChange: 250000,
       choices: [],
     ),
     'business_fail': Scene(
       id: 'business_fail',
       text: 'Sadly, your pottery business didn’t work out. You lost \$100,000.',
+      moneyChange: -100000,
       choices: [],
     ),
     'invest_options': Scene(
       id: 'invest_options',
       text: 'Where would you like to invest?',
       choices: [
-        Choice(
-          text: 'Invest in properties',
-          nextSceneId: 'property_invest',
-          moneyChange: 0,
-          wisdomChange: 1,
-        ),
-        Choice(
-          text: 'Invest in stocks',
-          nextSceneId: 'stock_invest',
-          moneyChange: 0,
-          wisdomChange: 1,
-        ),
+        Choice(text: 'Invest in properties', nextSceneId: 'property_invest', moneyChange: 0, wisdomChange: 1),
+        Choice(text: 'Invest in stocks', nextSceneId: 'stock_invest', moneyChange: 0, wisdomChange: 1),
       ],
     ),
     'property_invest': Scene(
       id: 'property_invest',
       text: 'You choose a haunted apartment complex. Tenants are scared, but it’s profitable!',
+      moneyChange: 200000,
       choices: [],
     ),
     'stock_invest': Scene(
       id: 'stock_invest',
-      text: _random.nextBool()
-          ? 'You hit the jackpot investing in an AI startup! You doubled your money.'
-          : 'The startup failed. You lost half your investment.',
+      text: stockSuccess
+        ? 'You hit the jackpot investing in an AI startup! You doubled your money.'
+        : 'The startup failed. You lost half your investment.',
+      moneyChange: stockSuccess ? 150000 : -100000,
       choices: [],
     ),
   };

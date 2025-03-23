@@ -24,6 +24,15 @@ class EndingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(
+      fontFamily: 'PressStart2P',
+      fontSize: 10,
+      color: Colors.black,
+      shadows: [
+        Shadow(blurRadius: 1, color: Colors.white, offset: Offset(1, 1)),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -32,12 +41,14 @@ class EndingScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("The End", style: Theme.of(context).textTheme.displayLarge),
-              const SizedBox(height: 30),
-              Text("Money: \$${finalMoney}", style: Theme.of(context).textTheme.bodyMedium),
-              Text("Nice major decisions: $finalWisdom", style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 30),
-              Text(getEnding(), style: Theme.of(context).textTheme.titleMedium),
+              Text("The End", style: textStyle.copyWith(fontSize: 20), textAlign: TextAlign.center),
+                const SizedBox(height: 30),
+                Text("Well done, $playerName!", style: textStyle, textAlign: TextAlign.center),
+                const SizedBox(height: 20),
+                Text("Final Balance: \$${finalMoney}", style: textStyle, textAlign: TextAlign.center),
+                Text("Good decisions made: $finalWisdom", style: textStyle, textAlign: TextAlign.center),
+                const SizedBox(height: 30),
+                Text(getEnding(), style: textStyle, textAlign: TextAlign.center),
             ],
           ),
         ),

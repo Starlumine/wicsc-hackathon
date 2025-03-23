@@ -49,6 +49,15 @@ class _GameScreenState extends State<GameScreen> {
     final currentScene = _scenes[_gameState.currentSceneId]!;
     String? bgImage = currentScene.backgroundImage;
 
+    const textStyle = TextStyle(
+      fontFamily: 'PressStart2P',
+      fontSize: 10,
+      color: Colors.black,
+      shadows: [
+        Shadow(blurRadius: 1.0, color: Colors.white, offset: Offset(1, 1)),
+      ],
+    );
+
     return Scaffold(
       body: Stack(
         children: [
@@ -60,39 +69,42 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
           Container(
-            color: Colors.black.withValues(alpha: 128), 
+            color: Colors.white, 
           ),
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    currentScene.text,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                  ...currentScene.choices.map(
-                    (choice) => Padding(
-                      padding: const EdgeInsets.only(top: 12.0),
-                      child: ElevatedButton(
-                        onPressed: () => _onChoiceSelected(choice),
-                        child: Text(
-                          choice.text,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          textAlign: TextAlign.center,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      currentScene.text,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    ...currentScene.choices.map(
+                      (choice) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () => _onChoiceSelected(choice),
+                          child: Text(
+                            choice.text,
+                            style: textStyle,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    'Money: \$${_gameState.money}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
+                    const Spacer(),
+                    Text(
+                      'Money: \$${_gameState.money}',
+                      style: textStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

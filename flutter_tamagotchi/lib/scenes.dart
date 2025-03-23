@@ -6,7 +6,6 @@ final Random _random = Random();
 Map<String, Scene> generateScenes(String playerName) {
   bool businessSuccess = _random.nextBool();
   bool stockSuccess = _random.nextBool();
-  bool gambleSuccess = _random.nextBool(); // Randomized gamble outcome
 
   return {
     'start': Scene(
@@ -97,7 +96,7 @@ Map<String, Scene> generateScenes(String playerName) {
     ),
     'business_fail': Scene(
       id: 'business_fail',
-      text: 'Sadly, your pottery business didn’t work out. You lost \$100,000.',
+      text: 'Sadly, your business didn’t work out. You lost \$100,000.',
       moneyChange: -100000,
       choices: [
         Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
@@ -124,8 +123,8 @@ Map<String, Scene> generateScenes(String playerName) {
     'stock_invest': Scene(
       id: 'stock_invest',
       text: stockSuccess
-          ? 'You hit the jackpot investing in an AI startup! You doubled your money.'
-          : 'The startup failed. You lost half your investment.',
+          ? 'You hit the jackpot investing in an AI startup! You got a lot of money.'
+          : 'The startup failed. You lost part of your investment.',
       moneyChange: stockSuccess ? 150000 : -100000,
       choices: [
         Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class EndingScreen extends StatelessWidget {
   final int finalMoney;
   final int finalWisdom;
+  final String playerName;
 
   const EndingScreen({
     super.key,
     required this.finalMoney,
     required this.finalWisdom,
+    required this.playerName,
   });
 
   String getEnding() {
@@ -33,7 +35,7 @@ class EndingScreen extends StatelessWidget {
               Text("The End", style: Theme.of(context).textTheme.displayLarge),
               const SizedBox(height: 30),
               Text("Money: \$${finalMoney}", style: Theme.of(context).textTheme.bodyMedium),
-              Text("Wisdom: $finalWisdom", style: Theme.of(context).textTheme.bodyMedium),
+              Text("Nice major decisions: $finalWisdom", style: Theme.of(context).textTheme.bodyMedium),
               const SizedBox(height: 30),
               Text(getEnding(), style: Theme.of(context).textTheme.titleMedium),
             ],

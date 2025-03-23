@@ -47,29 +47,56 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     final currentScene = _scenes[_gameState.currentSceneId]!;
+    String? bgImage = currentScene.backgroundImage;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Budget Life', style: Theme.of(context).textTheme.titleMedium),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              currentScene.text,
-              style: Theme.of(context).textTheme.bodyMedium,
+      body: Stack(
+        children: [
+          if (bgImage != null)
+            Positioned.fill(
+              child: Image.asset(
+                bgImage,
+                fit: BoxFit.cover,
+              ),
             ),
-            const SizedBox(height: 20),
-            ...currentScene.choices.map((choice) => ElevatedButton(
-              onPressed: () => _onChoiceSelected(choice),
-              child: Text(choice.text, style: Theme.of(context).textTheme.bodyMedium),
-            )),
-            const Spacer(),
-            Text('Money: \$${_gameState.money}', style: Theme.of(context).textTheme.bodyMedium),
-          ],
-        ),
+          Container( // Add a semi-transparent overlay if needed
+            color: Colors.black.withOpacity(0.5), 
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    currentScene.text,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  ...currentScene.choices.map(
+                    (choice) => Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: ElevatedButton(
+                        onPressed: () => _onChoiceSelected(choice),
+                        child: Text(
+                          choice.text,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    'Money: \$${_gameState.money}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

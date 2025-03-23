@@ -59,8 +59,8 @@ class _GameScreenState extends State<GameScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-          Container( // Add a semi-transparent overlay if needed
-            color: Colors.black.withOpacity(0.5), 
+          Container(
+            color: Colors.black.withValues(alpha: 128), 
           ),
           SafeArea(
             child: Padding(

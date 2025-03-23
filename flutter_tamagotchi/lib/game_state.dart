@@ -28,10 +28,12 @@ class Scene {
   final String id;
   final String text;
   final List<Choice> choices;
+  final String? backgroundImage;
 
   Scene({
     required this.id,
     required this.text,
     required this.choices,
+    this.backgroundImage,
   });
 }

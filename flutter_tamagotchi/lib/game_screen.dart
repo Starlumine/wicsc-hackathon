@@ -27,7 +27,7 @@ class _GameScreenState extends State<GameScreen> {
 
   void _onChoiceSelected(Choice choice) {
     setState(() {
-      _gameState.applyChoice(choice);
+      _gameState.applyChoice(choice, _scenes);
       kittyX = 2.0;
       animateKitty = true;
     });
@@ -55,7 +55,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   String getKittyImage() {
-    if (_gameState.money > 500000) {
+    if (_gameState.money > 300000) {
       return 'media/kitty_rich.png';
     } else if (_gameState.money < 100000) {
       return 'media/kitty_dirty.png';
@@ -128,12 +128,12 @@ class _GameScreenState extends State<GameScreen> {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 750),
-            bottom: 20,
+            bottom: 80,
             left: MediaQuery.of(context).size.width * kittyX,
             child: Image.asset(
               getKittyImage(),
-              width: 128,
-              height: 128,
+              width: 190,
+              height: 190,
             ),
           ),
         ],

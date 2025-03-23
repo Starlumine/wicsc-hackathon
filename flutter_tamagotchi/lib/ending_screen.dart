@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'intro_screen.dart';
 
 class EndingScreen extends StatelessWidget {
   final int finalMoney;
@@ -17,8 +18,20 @@ class EndingScreen extends StatelessWidget {
       return "Rich Ending";
     } else if (finalMoney > 100000) {
       return "Stable Ending";
+    } else if (finalMoney < 0) {
+      return "Bankrupt Ending";
     } else {
       return "Poor Ending";
+    }
+  }
+  
+  String getKittyImage() {
+    if (finalMoney > 300000 && finalWisdom > 3) {
+      return 'media/kitty_rich.png';
+    } else if (finalMoney > 100000) {
+      return 'media/kitty.png';
+    } else {
+      return 'media/kitty_dirty.png';
     }
   }
 
@@ -35,23 +48,55 @@ class EndingScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("The End", style: textStyle.copyWith(fontSize: 20), textAlign: TextAlign.center),
-                const SizedBox(height: 30),
-                Text("Well done, $playerName!", style: textStyle, textAlign: TextAlign.center),
-                const SizedBox(height: 20),
-                Text("Final Balance: \$${finalMoney}", style: textStyle, textAlign: TextAlign.center),
-                Text("Good decisions made: $finalWisdom", style: textStyle, textAlign: TextAlign.center),
-                const SizedBox(height: 30),
-                Text(getEnding(), style: textStyle, textAlign: TextAlign.center),
-            ],
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 200, 24, 24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("The End", style: textStyle.copyWith(fontSize: 20), textAlign: TextAlign.center),
+                    const SizedBox(height: 30),
+                    Text("Well done, $playerName!", style: textStyle, textAlign: TextAlign.center),
+                    const SizedBox(height: 20),
+                    Text("Final Balance: \$${finalMoney}", style: textStyle, textAlign: TextAlign.center),
+                    Text("Good decisions made: $finalWisdom", style: textStyle, textAlign: TextAlign.center),
+                    const SizedBox(height: 30),
+                    Text(getEnding(), style: textStyle, textAlign: TextAlign.center),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 100.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const IntroScreen()),
+                  );
+                },
+                child: Text('Go Again!', style: textStyle.copyWith(fontSize: 10)),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 200.0),
+              child: Image.asset(
+                getKittyImage(),
+                width: 256,
+                height: 256,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

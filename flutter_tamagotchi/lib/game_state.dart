@@ -3,10 +3,15 @@ class GameState {
   int wisdom = 0;
   String currentSceneId = 'start';
 
-  void applyChoice(Choice choice) {
+  void applyChoice(Choice choice, Map<String, Scene> scenes) {
     money += choice.moneyChange;
     wisdom += choice.wisdomChange;
     currentSceneId = choice.nextSceneId;
+
+    final newScene = scenes[currentSceneId];
+    if (newScene != null) {
+      money += newScene.moneyChange;
+    }
   }
 }
 

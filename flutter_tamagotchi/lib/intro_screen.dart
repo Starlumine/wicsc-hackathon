@@ -118,17 +118,17 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
           ),
           Positioned(
-            bottom: 20,
-            left: 20,
+            bottom: 40,
+            left: 40,
             child: Image.asset(
               'media/kitty.png',
-              width: 128,
-              height: 128,
+              width: 160,
+              height: 160,
             ),
           ),
           Positioned(
-            bottom: 140,
-            left: 75,
+            bottom: 200,
+            left: 100,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

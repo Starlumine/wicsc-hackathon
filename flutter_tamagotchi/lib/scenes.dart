@@ -6,6 +6,7 @@ final Random _random = Random();
 Map<String, Scene> generateScenes(String playerName) {
   bool businessSuccess = _random.nextBool();
   bool stockSuccess = _random.nextBool();
+  bool gambleSuccess = _random.nextBool(); // Randomized gamble outcome
 
   return {
     'start': Scene(
@@ -16,6 +17,8 @@ Map<String, Scene> generateScenes(String playerName) {
         Choice(text: 'Buy a car', nextSceneId: 'buy_car', moneyChange: 0, wisdomChange: 0),
       ],
     ),
+
+    // Buying House & Car Paths
     'buy_house': Scene(
       id: 'buy_house',
       text: 'The real estate agent shows you two houses:',
@@ -32,6 +35,8 @@ Map<String, Scene> generateScenes(String playerName) {
         Choice(text: 'Honda Civic (reliable)', nextSceneId: _random.nextBool() ? 'find_money' : 'no_event', moneyChange: -25000, wisdomChange: 1),
       ],
     ),
+
+    // Random Events
     'random_robbery_or_mom': Scene(
       id: 'random_robbery_or_mom',
       text: _random.nextBool()
@@ -62,6 +67,8 @@ Map<String, Scene> generateScenes(String playerName) {
         Choice(text: 'Continue', nextSceneId: 'start_business', moneyChange: 0, wisdomChange: 0),
       ],
     ),
+
+    // Business or Investing
     'start_business': Scene(
       id: 'start_business',
       text: '$playerName, you know the money won\'t last forever. What do you want to do about it?',
@@ -88,7 +95,6 @@ Map<String, Scene> generateScenes(String playerName) {
         Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
       ],
     ),
-
     'business_fail': Scene(
       id: 'business_fail',
       text: 'Sadly, your pottery business didn’t work out. You lost \$100,000.',
@@ -97,6 +103,8 @@ Map<String, Scene> generateScenes(String playerName) {
         Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
       ],
     ),
+
+    // Investing Paths
     'invest_options': Scene(
       id: 'invest_options',
       text: 'Where would you like to invest?',
@@ -124,6 +132,7 @@ Map<String, Scene> generateScenes(String playerName) {
       ],
     ),
 
+    // Dating Paths
     'dating': Scene(
       id: 'dating',
       text: 'You decide you want to find a date.', 
@@ -134,21 +143,35 @@ Map<String, Scene> generateScenes(String playerName) {
     ),
     'disappointing': Scene(
       id: 'disappointing',
-      text: 'You\'re date runs away with most of your money.',
+      text: 'Your date runs away with most of your money.',
       choices: [
-        Choice(text: 'Continue', nextSceneId: 'end', moneyChange: -300000, wisdomChange: -1),
+        Choice(text: 'Continue', nextSceneId: 'end', moneyChange: -300000, wisdomChange: -2),
       ],
     ),
     'happy': Scene(
       id: 'happy',
-      text: 'You and you\'re now partner are perfect for each other!',
+      text: 'You and your partner are perfect for each other!',
       choices: [
         Choice(text: 'Continue', nextSceneId: 'end', moneyChange: 0, wisdomChange: 2),
       ],
     ),
+
+    // Gambling Path
+    'gambling': Scene(
+      id: 'gambling',
+      text: gambleSuccess 
+          ? 'Lucky! You won the jackpot! Win \$20,000'
+          : 'Oh no! You went on a downward spiral and lost \$20,000.',
+      moneyChange: gambleSuccess ? 20000 : -20000,
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'end', moneyChange: 0, wisdomChange: 0),
+      ],
+    ),
+
+    // Final Scene
     'end': Scene(
       id: 'end',
-      text: 'You reflect on your life.',
+      text: 'You reflect on your life. The game ends here.',
       choices: [],
     ),
   };

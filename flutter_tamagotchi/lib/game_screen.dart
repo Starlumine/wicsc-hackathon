@@ -16,6 +16,9 @@ class _GameScreenState extends State<GameScreen> {
   final GameState _gameState = GameState();
   late Map<String, Scene> _scenes;
 
+  double kittyX = 0;
+  bool animateKitty = false;
+
   @override
   void initState() {
     super.initState();
@@ -25,11 +28,18 @@ class _GameScreenState extends State<GameScreen> {
   void _onChoiceSelected(Choice choice) {
     setState(() {
       _gameState.applyChoice(choice);
+      kittyX = 2.0;
+      animateKitty = true;
     });
 
-    final nextScene = _scenes[_gameState.currentSceneId];
-    if (nextScene != null && nextScene.choices.isEmpty) {
-      Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        animateKitty = false;
+        kittyX = 0;
+      });
+
+      final nextScene = _scenes[_gameState.currentSceneId];
+      if (nextScene != null && nextScene.choices.isEmpty) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -40,7 +50,17 @@ class _GameScreenState extends State<GameScreen> {
             ),
           ),
         );
-      });
+      }
+    });
+  }
+
+  String getKittyImage() {
+    if (_gameState.money > 500000) {
+      return 'media/kitty_rich.png';
+    } else if (_gameState.money < 100000) {
+      return 'media/kitty_dirty.png';
+    } else {
+      return 'media/kitty.png';
     }
   }
 
@@ -51,7 +71,7 @@ class _GameScreenState extends State<GameScreen> {
 
     const textStyle = TextStyle(
       fontFamily: 'PressStart2P',
-      fontSize: 10,
+      fontSize: 15,
       color: Colors.black,
       shadows: [
         Shadow(blurRadius: 1.0, color: Colors.white, offset: Offset(1, 1)),
@@ -106,6 +126,16 @@ class _GameScreenState extends State<GameScreen> {
                   ],
                 ),
               ),
+            ),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 750),
+            bottom: 20,
+            left: MediaQuery.of(context).size.width * kittyX,
+            child: Image.asset(
+              getKittyImage(),
+              width: 128,
+              height: 128,
             ),
           ),
         ],

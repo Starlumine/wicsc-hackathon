@@ -26,7 +26,7 @@ class EndingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const textStyle = TextStyle(
       fontFamily: 'PressStart2P',
-      fontSize: 10,
+      fontSize: 15,
       color: Colors.black,
       shadows: [
         Shadow(blurRadius: 1, color: Colors.white, offset: Offset(1, 1)),

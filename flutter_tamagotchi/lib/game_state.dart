@@ -1,5 +1,5 @@
 class GameState {
-  int money = 700000;
+  int money = 340000;
   int wisdom = 0;
   String currentSceneId = 'start';
 

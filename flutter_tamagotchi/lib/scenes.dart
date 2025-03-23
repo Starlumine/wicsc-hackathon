@@ -84,13 +84,18 @@ Map<String, Scene> generateScenes(String playerName) {
       id: 'business_success',
       text: 'Your business is booming! You make \$250,000 profit!',
       moneyChange: 250000,
-      choices: [],
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
+      ],
     ),
+
     'business_fail': Scene(
       id: 'business_fail',
       text: 'Sadly, your pottery business didn’t work out. You lost \$100,000.',
       moneyChange: -100000,
-      choices: [],
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
+      ],
     ),
     'invest_options': Scene(
       id: 'invest_options',
@@ -104,14 +109,46 @@ Map<String, Scene> generateScenes(String playerName) {
       id: 'property_invest',
       text: 'You choose a haunted apartment complex. Tenants are scared, but it’s profitable!',
       moneyChange: 200000,
-      choices: [],
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
+      ],
     ),
     'stock_invest': Scene(
       id: 'stock_invest',
       text: stockSuccess
-        ? 'You hit the jackpot investing in an AI startup! You doubled your money.'
-        : 'The startup failed. You lost half your investment.',
+          ? 'You hit the jackpot investing in an AI startup! You doubled your money.'
+          : 'The startup failed. You lost half your investment.',
       moneyChange: stockSuccess ? 150000 : -100000,
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'dating', moneyChange: 0, wisdomChange: 0),
+      ],
+    ),
+
+    'dating': Scene(
+      id: 'dating',
+      text: 'You decide you want to find a date.', 
+      choices: [
+        Choice(text: 'Date someone superficial but pretty', nextSceneId: 'disappointing', moneyChange: -200000, wisdomChange: -1),
+        Choice(text: 'Date someone smart', nextSceneId: 'happy', moneyChange: 100000, wisdomChange: 1),
+      ],
+    ),
+    'disappointing': Scene(
+      id: 'disappointing',
+      text: 'You\'re date runs away with most of your money.',
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'end', moneyChange: -300000, wisdomChange: -1),
+      ],
+    ),
+    'happy': Scene(
+      id: 'happy',
+      text: 'You and you\'re now partner are perfect for each other!',
+      choices: [
+        Choice(text: 'Continue', nextSceneId: 'end', moneyChange: 0, wisdomChange: 2),
+      ],
+    ),
+    'end': Scene(
+      id: 'end',
+      text: 'You reflect on your life.',
       choices: [],
     ),
   };

@@ -12,8 +12,8 @@ class _IntroScreenState extends State<IntroScreen> {
   final List<String> introPages = [
     'You just got off another long, tiring shift at your 9–5.\n\nYou get a call from your boss and get told that you are being laid off.',
     'With your gas tank nearly empty you decide to stop at a nearby gas station, and while filling up, something catches your eye: a Mega Millions display with a huge jackpot sign.\n\nFeeling lucky, you grab a lottery ticket.',
-    'Later that night, half-asleep on the couch, you scratch the ticket.\nOne number matches.\nThen another. You’ve won \$1 million!',
-    'Next morning, you race back to the gas station to claim your prize.\nAfter taxes, you’re handed \$700,000.\n\n...Not quite as much as you imagined.',
+    'Later that night, half-asleep on the couch, you scratch the ticket.\nOne number matches.\nThen another. You’ve won \$500,000!',
+    'Next morning, you race back to the gas station to claim your prize.\nAfter taxes, you’re handed \$340,000.\n\n...Not quite as much as you imagined.',
     'You want to splurge!',
   ];
 

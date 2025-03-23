@@ -28,6 +28,23 @@ flutter:
     - media/kitty.png
     - media/kitty_dirty.png
     - media/kitty_rich.png
+    - media/business_invest.png
+    - media/car_money.png
+    - media/dating.png
+    - media/house_car.png
+    - media/mom.png
+    - media/pipes.png
+    - media/robbery.png
+    - media/cat_house.png
+    - media/buy_car.png
+    - media/buy_house.png
+    - media/rich.png
+    - media/moneyloss.png
+    - media/haunted.png
+    - media/couplecat.png
+    - media/heartbroken.png
+    - media/property_stock.png
+    
 
   fonts:
     - family: PressStart2P

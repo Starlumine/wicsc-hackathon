@@ -40,16 +40,18 @@ class _GameScreenState extends State<GameScreen> {
 
       final nextScene = _scenes[_gameState.currentSceneId];
       if (nextScene != null && nextScene.choices.isEmpty) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EndingScreen(
-              finalMoney: _gameState.money,
-              finalWisdom: _gameState.wisdom,
-              playerName: widget.playerName,
+        Future.delayed(const Duration(seconds: 10), () { 
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EndingScreen(
+                finalMoney: _gameState.money,
+                finalWisdom: _gameState.wisdom,
+                playerName: widget.playerName,
+              ),
             ),
-          ),
-        );
+          );
+        });
       }
     });
   }

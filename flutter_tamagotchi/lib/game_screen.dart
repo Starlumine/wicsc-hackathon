@@ -81,15 +81,13 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          if (bgImage != null)
-            Positioned.fill(
-              child: Image.asset(
-                bgImage,
-                fit: BoxFit.cover,
-              ),
-            ),
-          Container(
-            color: Colors.white, 
+          Positioned.fill(
+            child: bgImage != null
+                ? Image.asset(
+                    bgImage,
+                    fit: BoxFit.cover,
+                  )
+                : Container(color: Colors.white),
           ),
           SafeArea(
             child: Center(

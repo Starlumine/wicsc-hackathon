@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontFamily: 'PressStart2P',
-            fontSize: 24,
+            fontSize: 36,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           ),
           bodyMedium: TextStyle(
             fontFamily: 'PressStart2P',
-            fontSize: 10,
+            fontSize: 15,
             color: Colors.black,
           ),
         ),

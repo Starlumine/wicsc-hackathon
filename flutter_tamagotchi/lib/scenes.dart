@@ -165,7 +165,7 @@ Map<String, Scene> generateScenes(String playerName) {
     'disappointing': Scene(
       id: 'disappointing',
       text: 'Your date runs away with most of your money.',
-      backgroundImage: 'media/heartbroken.png',
+      backgroundImage: 'media/heartbrokened.png',
       choices: [
         Choice(text: 'Continue', nextSceneId: 'end', moneyChange: -300000, wisdomChange: -2),
       ],
